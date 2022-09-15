@@ -5,7 +5,11 @@ var __makeTemplateObject = (this && this.__makeTemplateObject) || function (cook
 };
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -18,7 +22,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -31,7 +35,7 @@ var styled_components_1 = __importDefault(require("styled-components"));
 var fileLoaders_1 = require("../../utils/fileLoaders");
 var HTMLRenderer = function (_a) {
     var currentDocument = _a.mainState.currentDocument;
-    react_1.useEffect(function () {
+    (0, react_1.useEffect)(function () {
         var b64String = currentDocument === null || currentDocument === void 0 ? void 0 : currentDocument.fileData;
         var bodyBase64 = (b64String === null || b64String === void 0 ? void 0 : b64String.replace("data:text/html;base64,", "")) || "";
         var body = window.atob(bodyBase64);
@@ -41,7 +45,7 @@ var HTMLRenderer = function (_a) {
             return;
         var iframeDoc = iframe.document;
         iframeDoc.open();
-        iframeDoc.write("" + body);
+        iframeDoc.write("".concat(body));
         iframeDoc.close();
     }, []);
     return (react_1.default.createElement(Container, { id: "html-renderer" },

@@ -5,7 +5,11 @@ var __makeTemplateObject = (this && this.__makeTemplateObject) || function (cook
 };
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -18,7 +22,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -30,9 +34,9 @@ exports.FileName = void 0;
 var react_1 = __importStar(require("react"));
 var styled_components_1 = __importDefault(require("styled-components"));
 var state_1 = require("../state");
-exports.FileName = function () {
+var FileName = function () {
     var _a, _b;
-    var _c = react_1.useContext(state_1.DocViewerContext).state, config = _c.config, currentDocument = _c.currentDocument;
+    var _c = (0, react_1.useContext)(state_1.DocViewerContext).state, config = _c.config, currentDocument = _c.currentDocument;
     if (!currentDocument || ((_a = config === null || config === void 0 ? void 0 : config.header) === null || _a === void 0 ? void 0 : _a.disableFileName))
         return null;
     var fileName = currentDocument.uri || "";
@@ -46,5 +50,6 @@ exports.FileName = function () {
     }
     return (react_1.default.createElement(Container, { id: "file-name", "data-testid": "file-name" }, fileName));
 };
+exports.FileName = FileName;
 var Container = styled_components_1.default.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  flex: 1;\n  text-align: left;\n  color: ", ";\n  font-weight: bold;\n  margin: 0 10px;\n  overflow: hidden;\n"], ["\n  flex: 1;\n  text-align: left;\n  color: ", ";\n  font-weight: bold;\n  margin: 0 10px;\n  overflow: hidden;\n"])), function (props) { return props.theme.text_primary; });
 var templateObject_1;
