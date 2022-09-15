@@ -33,7 +33,7 @@ export const useDocumentLoader = (): {
       const controller = new AbortController();
       const { signal } = controller;
 
-      fetch(documentURI).then((response) => {
+      fetch(documentURI, { method: "HEAD", signal }).then((response) => {
         const contentTypeRaw = response.headers.get("content-type");
         const contentTypes = contentTypeRaw?.split(";") || [];
         const contentType = contentTypes.length ? contentTypes[0] : undefined;
